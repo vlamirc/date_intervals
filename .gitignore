@@ -11,3 +11,6 @@
 /.bundle/
 /vendor/bundle
 /lib/bundler/man/
+
+# ignore local input data
+/input/*.csv
