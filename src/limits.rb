@@ -1,5 +1,12 @@
 require 'date'
 
+class MalformedDateStringError < StandardError; end
+class DateOutOfSequenceError < StandardError; end
+class InvalidDayError < StandardError; end
+class InvalidMonthError < StandardError; end
+class InvalidFirstDateError < StandardError; end
+class InvalidYearError < StandardError; end
+
 # class Limits
 # --
 class Limits
@@ -13,33 +20,33 @@ class Limits
 
   def check_date(date_string)
     date_parts = date_string.split
-    raise "Malformed date string: #{date_string}" if date_parts.size < 2 || date_parts.size > 3
+    raise MalformedDateStringError.new "Malformed date string: #{date_string}" if date_parts.size < 2 || date_parts.size > 3
 
     check_day(date_parts[0])
     check_month(date_parts[1])
     year = check_and_set_year(date_parts[2], date_string)
 
     date = Date.parse(date_string + year, false)
-    raise "Date out of sequence: #{date}" if defined?(@prev_date) && date <= @prev_date
+    raise DateOutOfSequenceError.new "Date out of sequence: #{date}" if defined?(@prev_date) && date <= @prev_date
 
     date
   end
 
   def check_day(day)
-    raise "Invalid day: #{day}" if day.to_i < 1 || day.to_i > 31
+    raise InvalidDayError.new "Invalid day: #{day}" if day.to_i < 1 || day.to_i > 31
   end
 
   def check_month(month)
-    raise "Invalid month: #{month}" unless Date::ABBR_MONTHNAMES.include? month
+    raise InvalidMonthError.new "Invalid month: #{month}" unless Date::ABBR_MONTHNAMES.include? month
   end
 
   def check_and_set_year(year, date_string)
     if year.nil?
-      raise 'Invalid first date' unless defined?(@prev_date)
+      raise InvalidFirstDateError.new 'Invalid first date' unless defined?(@prev_date)
 
       next_year(@prev_date, date_string)
     else
-      raise "Invalid year: #{year}" if year.to_i < 1
+      raise InvalidYearError.new "Invalid year: #{year}" if year.to_i < 1
 
       ''
     end

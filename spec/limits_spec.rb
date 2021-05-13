@@ -17,40 +17,38 @@ RSpec.describe Limits do
       bad_input
     end
 
+    before do
+      @input = InputData.new
+    end
+
     it 'should raises exception (Malformed date string)' do
-      input = InputData.new
-      input.input_from_string(@bad_input_1)
-      expect { Limits.new(input) }.to raise_error(RuntimeError)
+      @input.input_from_string(@bad_input_1)
+      expect { Limits.new(@input) }.to raise_error(MalformedDateStringError)
     end
 
     it 'should raises exception (Invalid month)' do
-      input = InputData.new
-      input.input_from_string(@bad_input_2)
-      expect { Limits.new(input) }.to raise_error(RuntimeError)
+      @input.input_from_string(@bad_input_2)
+      expect { Limits.new(@input) }.to raise_error(InvalidMonthError)
     end
 
     it 'should raises exception (Invalid day)' do
-      input = InputData.new
-      input.input_from_string(@bad_input_3)
-      expect { Limits.new(input) }.to raise_error(RuntimeError)
+      @input.input_from_string(@bad_input_3)
+      expect { Limits.new(@input) }.to raise_error(InvalidDayError)
     end
 
     it 'should raises exception (Date out of sequence)' do
-      input = InputData.new
-      input.input_from_string(@bad_input_4)
-      expect { Limits.new(input) }.to raise_error(RuntimeError)
+      @input.input_from_string(@bad_input_4)
+      expect { Limits.new(@input) }.to raise_error(DateOutOfSequenceError)
     end
 
     it 'should raises exception (Invalid first date)' do
-      input = InputData.new
-      input.input_from_string(@bad_input_5)
-      expect { Limits.new(input) }.to raise_error(RuntimeError)
+      @input.input_from_string(@bad_input_5)
+      expect { Limits.new(@input) }.to raise_error(InvalidFirstDateError)
     end
 
     it 'should raises exception (Invalid year)' do
-      input = InputData.new
-      input.input_from_string(@bad_input_6)
-      expect { Limits.new(input) }.to raise_error(RuntimeError)
+      @input.input_from_string(@bad_input_6)
+      expect { Limits.new(@input) }.to raise_error(InvalidYearError)
     end
   end
 
