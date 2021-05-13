@@ -7,7 +7,7 @@ Simple function that returns date intervals without gaps from an input array
 ## Install
 Clone project and
 ```
-bundle
+bundle install
 ```
 
 
@@ -33,7 +33,7 @@ Copy `input/dates.csv.example` to `input/dates.csv` (or `input/[whatever].csv`),
 - `d` must be: `1` to `31`
 - `m` must be: `Jan` to `Dec`
 > See `Date::ABBR_MONTHNAMES` at https://ruby-doc.org/stdlib/libdoc/date/rdoc/Date.html
-- `y` must be an valid year with 4 digits
+- `y` must be a valid year
 
 #### Important rules
 - First date must be in `"d m y"` format
@@ -50,6 +50,6 @@ Exceptions will be raise if
 
 ## Run
 ```
-ruby date_intervals input/dates.csv
+ruby date_intervals.rb input/dates.csv
 ```
 > Tested with Ruby 3.0.1
