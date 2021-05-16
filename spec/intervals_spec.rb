@@ -4,14 +4,18 @@ RSpec.describe Intervals do
   context 'with good input' do
     before(:all) do
       good_input
-    end
-
-    it 'should return correct Json' do
       input = InputData.new
       input.input_from_string(@good_input)
       limits = Limits.new(input)
-      intervals = Intervals.new(limits)
-      array = JSON.parse(intervals.pretty_json)
+      @intervals = Intervals.new(limits)
+    end
+
+    it do
+      expect(@intervals).to respond_to(:pretty_json).with(0).argument
+    end
+
+    it 'should return correct Json' do
+      array = JSON.parse(@intervals.pretty_json)
       expect(array.size).to eq(4)
       expect(array[0]['interval']).to eq(1)
       expect(array[0]['start']).to eq('2020-08-11')

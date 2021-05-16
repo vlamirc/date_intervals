@@ -18,6 +18,12 @@ class Limits
     end
   end
 
+  def array_of_dates
+    @dates
+  end
+
+  private
+
   def check_date(date_string)
     date_parts = date_string.split
     raise MalformedDateStringError.new "Malformed date string: #{date_string}" if date_parts.size < 2 || date_parts.size > 3
@@ -64,9 +70,5 @@ class Limits
     end
 
     next_date.year.to_s
-  end
-
-  def array_of_dates
-    @dates
   end
 end

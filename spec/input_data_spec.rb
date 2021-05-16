@@ -1,4 +1,8 @@
 RSpec.describe InputData do
+  it { is_expected.to respond_to(:input_from_file).with(1).argument }
+  it { is_expected.to respond_to(:input_from_string).with(1).argument }
+  it { is_expected.to respond_to(:array_of_strings).with(0).argument }
+
   context 'with good input' do
     before(:all) do
       good_input

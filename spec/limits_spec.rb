@@ -2,13 +2,17 @@ RSpec.describe Limits do
   context 'with good input' do
     before(:all) do
       good_input
+      input = InputData.new
+      input.input_from_string(@good_input)
+      @limits = Limits.new(input)
+    end
+
+    it do
+      expect(@limits).to respond_to(:array_of_dates).with(0).argument
     end
 
     it 'should return correct array of dates' do
-      input = InputData.new
-      input.input_from_string(@good_input)
-      limits = Limits.new(input)
-      expect(limits.array_of_dates).to eq(@good_array_of_dates)
+      expect(@limits.array_of_dates).to eq(@good_array_of_dates)
     end
   end
 

@@ -10,6 +10,12 @@ class Intervals
     set_intervals
   end
 
+  def pretty_json
+    JSON.pretty_generate(@ranges)
+  end
+
+  private
+
   def set_ranges
     @dates.each_index do |i|
       @ranges << { interval: i + 1, start: @dates[i], end: @dates[i + 1] } unless @dates[i + 1].nil?
@@ -26,9 +32,5 @@ class Intervals
       end
       range[:dates] = dates
     end
-  end
-
-  def pretty_json
-    JSON.pretty_generate(@ranges)
   end
 end

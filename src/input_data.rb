@@ -17,15 +17,17 @@ class InputData
     csv_parse(string)
   end
 
+  def array_of_strings
+    @date_array
+  end
+
+  private
+
   def csv_parse(input)
     csv = CSV.parse_line(input)
 
     csv.each do |date_string|
       @date_array << date_string
     end
-  end
-
-  def array_of_strings
-    @date_array
   end
 end
