@@ -3,8 +3,8 @@ RSpec.describe Limits do
     before(:all) do
       good_input
       input = InputData.new
-      input.input_from_string(@good_input)
-      @limits = Limits.new(input)
+      input.input_from_string(string: @good_input)
+      @limits = Limits.new(input: input)
     end
 
     it do
@@ -26,33 +26,33 @@ RSpec.describe Limits do
     end
 
     it 'should raises exception (Malformed date string)' do
-      @input.input_from_string(@bad_input_1)
-      expect { Limits.new(@input) }.to raise_error(MalformedDateStringError)
+      @input.input_from_string(string: @bad_input_1)
+      expect { Limits.new(input: @input) }.to raise_error(MalformedDateStringError)
     end
 
     it 'should raises exception (Invalid month)' do
-      @input.input_from_string(@bad_input_2)
-      expect { Limits.new(@input) }.to raise_error(InvalidMonthError)
+      @input.input_from_string(string: @bad_input_2)
+      expect { Limits.new(input: @input) }.to raise_error(InvalidMonthError)
     end
 
     it 'should raises exception (Invalid day)' do
-      @input.input_from_string(@bad_input_3)
-      expect { Limits.new(@input) }.to raise_error(InvalidDayError)
+      @input.input_from_string(string: @bad_input_3)
+      expect { Limits.new(input: @input) }.to raise_error(InvalidDayError)
     end
 
     it 'should raises exception (Date out of sequence)' do
-      @input.input_from_string(@bad_input_4)
-      expect { Limits.new(@input) }.to raise_error(DateOutOfSequenceError)
+      @input.input_from_string(string: @bad_input_4)
+      expect { Limits.new(input: @input) }.to raise_error(DateOutOfSequenceError)
     end
 
     it 'should raises exception (Invalid first date)' do
-      @input.input_from_string(@bad_input_5)
-      expect { Limits.new(@input) }.to raise_error(InvalidFirstDateError)
+      @input.input_from_string(string: @bad_input_5)
+      expect { Limits.new(input: @input) }.to raise_error(InvalidFirstDateError)
     end
 
     it 'should raises exception (Invalid year)' do
-      @input.input_from_string(@bad_input_6)
-      expect { Limits.new(@input) }.to raise_error(InvalidYearError)
+      @input.input_from_string(string: @bad_input_6)
+      expect { Limits.new(input: @input) }.to raise_error(InvalidYearError)
     end
   end
 

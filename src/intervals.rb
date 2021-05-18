@@ -3,7 +3,7 @@ require 'json'
 # class Intervals
 # --
 class Intervals
-  def initialize(limits)
+  def initialize(limits:)
     @dates = limits.array_of_dates
     @ranges = @intervals = []
     set_ranges

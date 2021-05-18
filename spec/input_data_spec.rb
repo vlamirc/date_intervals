@@ -1,6 +1,6 @@
 RSpec.describe InputData do
-  it { is_expected.to respond_to(:input_from_file).with(1).argument }
-  it { is_expected.to respond_to(:input_from_string).with(1).argument }
+  it { is_expected.to respond_to(:input_from_file).with_keywords(:path) }
+  it { is_expected.to respond_to(:input_from_string).with_keywords(:string) }
   it { is_expected.to respond_to(:array_of_strings).with(0).argument }
 
   context 'with good input' do
@@ -10,7 +10,7 @@ RSpec.describe InputData do
 
     it 'should return correct array of date strings' do
       input = InputData.new
-      input.input_from_string(@good_input)
+      input.input_from_string(string: @good_input)
       expect(input.array_of_strings).to eq(@good_array_of_strings)
     end
   end
@@ -22,7 +22,7 @@ RSpec.describe InputData do
 
     it 'should not return correct array of date strings' do
       input = InputData.new
-      input.input_from_string(@bad_input_1)
+      input.input_from_string(string: @bad_input_1)
       expect(input.array_of_strings).to_not eq(@good_array_of_strings)
     end
   end

@@ -5,9 +5,9 @@ require 'src/limits'
 require 'src/intervals'
 
 input = InputData.new
-input.input_from_file(ARGV[0])
+input.input_from_file(path: ARGV[0])
 
-limits = Limits.new(input)
-intervals = Intervals.new(limits)
+limits = Limits.new(input: input)
+intervals = Intervals.new(limits: limits)
 
 puts intervals.pretty_json

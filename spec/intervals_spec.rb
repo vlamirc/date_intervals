@@ -5,9 +5,9 @@ RSpec.describe Intervals do
     before(:all) do
       good_input
       input = InputData.new
-      input.input_from_string(@good_input)
-      limits = Limits.new(input)
-      @intervals = Intervals.new(limits)
+      input.input_from_string(string: @good_input)
+      limits = Limits.new(input: input)
+      @intervals = Intervals.new(limits: limits)
     end
 
     it do

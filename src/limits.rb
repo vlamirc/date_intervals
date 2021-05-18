@@ -10,19 +10,27 @@ class InvalidYearError < StandardError; end
 # class Limits
 # --
 class Limits
-  def initialize(input_data)
-    @dates = []
-    input_data.array_of_strings.each do |date_string|
-      @dates << check_date(date_string)
-      @prev_date = @dates.last
-    end
-  end
+  attr_reader :array_of_dates
 
-  def array_of_dates
-    @dates
+  def initialize(input:)
+    @input = input
+    @array_of_dates = []
+
+    parse_strings
   end
 
   private
+
+  def array_of_strings
+    @input.array_of_strings
+  end
+
+  def parse_strings
+    array_of_strings.each do |date_string|
+      @array_of_dates << check_date(date_string)
+      @prev_date = @array_of_dates.last
+    end
+  end
 
   def check_date(date_string)
     date_parts = date_string.split
